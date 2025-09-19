@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_1</title>
+    <!-- <script src="./javascript/task1.js"></script> -->
+
+
+    <script>
+        /*
+                class User {
+                    #balance
+                    constructor(initBalance) {
+                        this.Balance = initBalance
+                    }
+                    get Balance() {
+                        return this.#balance
+                    }
+                    set Balance(value) {
+                        if (value < 0) throw new Error("Баланс не може бути від'ємним");
+                        this.#balance = value
+                    }
+                    deposit(amount) {
+                        if (amount <= 0) throw new Error("Сума поповнення має бути більшою за 0");
+                        return this.Balance += amount
+                    }
+                    withdraw(amount) {
+                        if (amount <= 0) throw new Error("Сума зняття має бути більшою за 0");
+                        if (amount > this.Balance) throw new Error("Недостатньо коштів на рахунку");
+                        return this.Balance -= amount;
+                    }
+                }
+        
+                const newUser = new User(1000);
+                console.log(newUser);
+                console.log(newUser.deposit(500));
+                console.log(newUser.withdraw(700));
+                try {
+                    console.log("Пробуем снять больше, чем есть:");
+                    console.log(newUser.withdraw(900));
+                } catch (error) {
+                    console.log("Помилка:", error.message);
+                }
+                console.log("Баланс після всіх операцій:", newUser.Balance);
+        */
+
+        class Product {
+            #name
+            #price
+            #quantity
+            constructor(initName, initPrice, initQuantity) {
+                this.Name = initName,
+                    this.Price = initPrice,
+                    this.Quantity = initQuantity
+            }
+            get Name() {
+                return this.#name
+            }
+            set Name(val) {
+                if (typeof val !== 'string' || val.trim() === '') {
+                    throw new Error("Назва має бути непорожнім рядком")
+                }
+                this.#name = val
+            }
+            get Price() {
+                return this.#price
+            }
+            set Price(val) {
+                if (val < 0) throw new Error("Ціна не може бути від'ємною");
+                this.#price = val
+            }
+            get Quantity() {
+                return this.#quantity
+            }
+            set Quantity(count) {
+                if (count < 0) throw new Error("К-сть не може бути меншою за 0");
+                this.#quantity = count
+            }
+            buy(amount) {
+                if (amount <= 0) throw new Error("Для покупки вкажіть додатню кі-ть.")
+                if (amount > this.Quantity) throw new Error("Немає на складі")
+                return this.Quantity -= amount
+            }
+            restock(amount) {
+                if (amount <= 0) throw new Error("Число для поповнення має бути додатнім цілим");
+                return this.Quantity += amount
+            }
+            toString() {
+                return `Товар: ${this.Name}, ціна: ${this.Price}$, залишок: ${this.Quantity} шт.`
+            }
+        }
+
+        const phone = new Product("iPhone", 1000, 5);
+        console.log(phone.toString());
+        console.log(phone.buy(3));
+        console.log(phone.restock(10));
+        console.log(phone.toString());
+
+        const phone2 = new Product("Samsung", 900, 3);
+        console.log(phone2.toString());
+
+    </script>
+
+</head>
+
+<body>
+
+    <h4>Task_1</h4>
+    <p>=================================================</p>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_1</title>
+    <!-- <script src="./javascript/task1.js"></script> -->
+
+
+    <script>
+
+        class User {
+            #password
+            constructor(initPassword, initLogin) {
+                this.Password = initPassword
+                this.login = initLogin
+            }
+            get Password() {
+                return '*'.repeat(this.#password.length);
+            }
+            set Password(newPassword) {
+                this.#password = newPassword
+            }
+            checkPassword(password) {
+                return this.#password === password
+            }
+        }
+
+        const u1 = new User('qwerty', 'Dmytro');
+        console.log(u1.Password);
+        u1.Password = 'newpass'
+        console.log(u1.checkPassword('newpass'));
+
+    </script>
+
+</head>
+
+<body>
+
+    <h4>Task_1</h4>
+    <p>=================================================</p>
+
+</body>
+
+</html>
