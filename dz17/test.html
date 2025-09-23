@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_3</title>
+    <script>
+        class Company {
+            constructor(initData) {
+                Object.assign(this, initData)
+            }
+            toString() {
+                return `${this.title} - ${this.registryNumber}`
+            }
+        }
+        class Product {
+            constructor(initData) {
+                Object.assign(this, initData)
+            }
+            toString() {
+                return `${this.title} - ${this.count}`
+            }
+        }
+        class Store {
+            constructor(initProductList = []) {
+                this.productList = [...initProductList]
+            }
+
+            add(productObj) {
+                this.productList.push({
+                    id: productObj.title + new Date().getTime(),
+                    data: productObj
+                })
+            }
+
+            remove(productIdToRemove) {
+                this.productList = this.productList.filter(
+                    productItem => productItem.id !== productIdToRemove
+                )
+            }
+
+            filterByProductName(productName) {
+                return this.productList.filter(
+                    prodItem => prodItem.data.title === productName
+                )
+            }
+
+            filterByCompanyName(companyName) {
+                return this.productList.filter(
+                    prodItem => prodItem.data.company.title === companyName
+                )
+            }
+        }
+
+        const comp1 = new Company({ title: 'Milka', registryNumber: 11111 })
+        const comp2 = new Company({ title: 'Nestle', registryNumber: 22222 })
+
+        const pr1 = new Product({ title: 'Pie', measureUnits: 'kg', count: 3, company: comp1 })
+        const pr2 = new Product({ title: 'Chocolate', measureUnits: 'pcs', count: 10, company: comp2 })
+        const pr3 = new Product({ title: 'Cake', measureUnits: 'kg', count: 5, company: comp1 })
+
+        const store = new Store()
+        store.add(pr1)
+        store.add(pr2)
+        store.add(pr3)
+
+        console.log("Фільтр по Milka:", store.filterByCompanyName('Milka'))
+        console.log("Фільтр по Nestle:", store.filterByCompanyName('Nestle'))
+
+    </script>
+
+</head>
+
+<body>
+
+    <h4>Task_3</h4>
+    <p>Склад. База товарів, які зберігаються на складі: назва товару, одиниця виміру, кількість, фірма виробник (назва,
+        реєстраційний номер). Організувати реєстрацію/відвантаження товарів, фільтрація за назвою товару.</p>
+
+</body>
+
+</html>
