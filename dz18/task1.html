@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task1</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        [class*="__container"] {
+            max-width: 1030px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        main {
+            padding-top: 10vh;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .hero__number {
+            /* max-width: 600px; */
+            display: flex;
+            align-items: center;
+            gap: 1.875rem;
+
+            input {
+                max-width: 12.5rem;
+                border: .0625rem solid grey;
+                border-radius: .1875rem;
+                padding: .3125rem .5rem;
+                ;
+            }
+        }
+
+        .hero__buttons {
+            display: flex;
+            gap: .625rem;
+
+            .btn {
+                padding: .3125rem .5rem;
+                border: .0625rem solid grey;
+                border-radius: .1875rem;
+                transition: background-color .3s ease;
+            }
+
+            .btn:hover {
+                background-color: #dcdcdc;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header></header>
+    <main class="main">
+        <section class="hero">
+            <div class="hero__container">
+                <form action="#" class="form">
+                    <div class="hero__number number-hero number-hero__first">
+                        <h4 class="number-hero__title">Перше число:</h4>
+                        <input class="number-hero__input number-hero__input-first" type="number" value="0">
+                    </div>
+                    <div class="hero__number number-hero number-hero__second">
+                        <h4>Друге число:</h4>
+                        <input class="number-hero__input number-hero__input-second" type="number" value="0">
+                    </div>
+                    <div class="hero__buttons">
+                        <button class="btn btn-add">Додати</button>
+                        <button class="btn btn-subtract">Відняти</button>
+                        <button class="btn btn-product">Помножити</button>
+                        <button class="btn btn-divide">Поділити</button>
+                    </div>
+                    <div class="hero__number number-hero number-hero__result">
+                        <h4>Результат:</h4>
+                        <input class="number-hero__input number-hero__input-res" type="number" value="0">
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+
+    <script>
+
+        window.onload = function () {
+            document.querySelector('.btn-add').onclick = getSum;
+            document.querySelector('.btn-subtract').onclick = getSubtract;
+            document.querySelector('.btn-product').onclick = getProduct;
+            document.querySelector('.btn-divide').onclick = getDivide;
+        }
+        function getNumbers() {
+            const numb1 = parseFloat(document.querySelector('.number-hero__input-first').value)
+            const numb2 = parseFloat(document.querySelector('.number-hero__input-second').value)
+            return [numb1, numb2]
+        }
+
+        function getSum() {
+            const [number1, number2] = getNumbers();
+            document.querySelector('.number-hero__input-res').value = number1 + number2;
+        }
+        function getSubtract() {
+            const [number1, number2] = getNumbers();
+            document.querySelector('.number-hero__input-res').value = number1 - number2;
+        }
+        function getProduct() {
+            const [number1, number2] = getNumbers();
+            document.querySelector('.number-hero__input-res').value = number1 * number2;
+        }
+        function getDivide() {
+            const [number1, number2] = getNumbers();
+            if (number2 === 0) alert('Ділити на 0 не можна');
+            document.querySelector('.number-hero__input-res').value = (number1 / number2).toFixed(2);
+        }
+
+    </script>
+</body>
+
+</html>
