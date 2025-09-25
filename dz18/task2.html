@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task1</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        [class*="__container"] {
+            max-width: 1030px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        main {
+            padding-top: 10vh;
+        }
+
+        .hero__task {
+            margin-bottom: 1.25rem;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        input {
+            max-width: 12.5rem;
+            border: .0625rem solid gray;
+            padding: .3125rem .5rem;
+        }
+
+        .form-user__btn {
+            align-self: start;
+            border: .0625rem solid gray;
+            padding: .3125rem .5rem;
+            border-radius: .3125rem;
+            transition: background-color .3s ease;
+
+            &:hover {
+                background-color: rgb(189, 189, 189);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header></header>
+    <main class="main">
+        <section class="hero">
+            <div class="hero__container">
+                <p class="hero__task">Користувач задає рік народження. Визначити кількість років користувача.</p>
+                <form action="#" class="form form-user">
+                    <h4 class="form-user__age">Ваш рік народження:</h4>
+                    <input type="number" class="form-user__input" value="0">
+                    <button class="form-user__btn" type="button">Порахувати</button>
+                    <h4 class="form-user__age">Вам:</h4>
+                    <input type="text" class="form-user__res" value="0">
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+
+    <script>
+        if (confirm('Почати тестування?')) {
+            window.onload = function () {
+                document.querySelector('.form-user__btn').onclick = getResult;
+            }
+            function getResult() {
+                const userAge = parseInt(document.querySelector('.form-user__input').value);
+                const currentYear = new Date().getFullYear();
+                const result = document.querySelector('.form-user__res')
+
+                if (userAge < currentYear - 100) {
+                    result.value = `Невірний рік.`
+                    return
+                }
+                if (isNaN(userAge) || userAge > currentYear) {
+                    result.value = "Невірний рік.";
+                    return;
+                }
+                const age = currentYear - userAge;
+                result.value = age
+            }
+        }
+    </script>
+</body>
+
+</html>

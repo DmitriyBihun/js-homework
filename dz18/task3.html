@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task1</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        [class*="__container"] {
+            max-width: 1030px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        main {
+            padding-top: 10vh;
+        }
+
+        .hero__task {
+            margin-bottom: 1.25rem;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .user-form {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        input {
+            max-width: 6.25rem;
+            border: .0625rem solid gray;
+            padding: .3125rem .5rem;
+        }
+
+        .form__sum,
+        .table-form__btn {
+            align-self: start;
+            border: .0625rem solid gray;
+            padding: .3125rem .5rem;
+            border-radius: .3125rem;
+            transition: background-color .3s ease;
+
+            &:hover {
+                background-color: rgb(189, 189, 189);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header></header>
+    <main class="main">
+        <section class="hero">
+            <div class="hero__container">
+                <p class="hero__task">Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті
+                    формується таблиця з input, куди користувач вводить оцінки. Після цього натискає на кнопку “get sum”
+                    і знаходить середнє значення.</p>
+                <form action="#" class="form">
+                    <div class="form__user user-form">
+                        <h4 class="form-user__title">К-сть оцінок:</h4>
+                        <input type="number" class="form-user__numbers" value="2">
+                    </div>
+                    <div class="form__table table-form">
+                        <button type="button" class="table-form__btn">Get Table</button>
+
+                    </div>
+                    <button type="button" class="form__sum">Get Sum</button>
+                    <div class="form__average">Average: <span></span> </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+
+    <script>
+        if (confirm('Почати тестування?')) {
+            const countOfNumbers = document.querySelector('.form-user__numbers');
+            const tableContainer = document.querySelector('.form__table');
+            const tableBtn = document.querySelector('.table-form__btn');
+            const sumBtn = document.querySelector('.form__sum');
+            const averageNumb = document.querySelector('.form__average span')
+
+            tableBtn.onclick = function () {
+                const count = parseInt(document.querySelector('.form-user__numbers').value)
+                tableContainer.innerHTML = '';
+
+                for (let i = 0; i < count; i++) {
+                    const input = document.createElement('input');
+                    input.style.marginRight = '0.625rem'
+                    input.style.marginBottom = '0.625rem'
+                    input.type = 'number';
+                    input.className = 'table-form__input'
+                    input.value = 0;
+                    tableContainer.appendChild(input)
+                }
+            }
+
+            sumBtn.onclick = function () {
+                const tableInputs = document.querySelectorAll('.table-form__input');
+
+                let sumOfNumbers = 0;
+                tableInputs.forEach(input => {
+                    sumOfNumbers += Number(input.value)
+                });
+                const average = sumOfNumbers / tableInputs.length;
+                averageNumb.textContent = average.toFixed(2)
+            }
+        }
+    </script>
+</body>
+
+</html>
