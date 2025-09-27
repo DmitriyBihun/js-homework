@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task2</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header></header>
+    <main class="main">
+        <section class="about">
+            <div class="about__container">
+                <p class="about__task">Дано 5 елементів input. При введенні значення у якийсь із них необхідно
+                    автоматично заповнювати інші (усі попередні у
+                    спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше
+                    (кожен наступне на 1
+                    більше за попереднього))</p>
+                <div class="about__box box">
+                    <div class="box__item item-box">
+                        <label class="item-box__label" for="some-value1">
+                            Value1
+                            <input class="item-box__input" id="some-value1" type="number">
+                        </label>
+                    </div>
+                    <div class="box__item item-box">
+                        <label class="item-box__label" for="some-value2">
+                            Value2
+                            <input class="item-box__input" id="some-value2" type="number">
+                        </label>
+                    </div>
+                    <div class="box__item item-box">
+                        <label class="item-box__label" for="some-value3">
+                            Value3
+                            <input class="item-box__input" id="some-value3" type="number">
+                        </label>
+                    </div>
+                    <div class="box__item item-box">
+                        <label class="item-box__label" for="some-value4">
+                            Value4
+                            <input class="item-box__input" id="some-value4" type="number">
+                        </label>
+                    </div>
+                    <div class="box__item item-box">
+                        <label class="item-box__label" for="some-value5">
+                            Value5
+                            <input class="item-box__input" id="some-value5" type="number">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+
+    <script>
+        const inputs = document.querySelectorAll('.item-box__input');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', () => {
+                const value = Number(input.value);
+
+                let previousIndex = index - 1;
+
+                let step = 1;
+                while (previousIndex >= 0) {
+                    inputs[previousIndex].value = value - step;
+                    previousIndex--;
+                    step++
+                }
+                let nextIndex = index + 1;
+                step = 1;
+                while (nextIndex < inputs.length) {
+                    inputs[nextIndex].value = value + step;
+                    nextIndex++;
+                    step++
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

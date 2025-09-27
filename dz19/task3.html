@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task3</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header></header>
+    <main class="main">
+        <section class="review">
+            <div class="review__container">
+                <p class="review__task">Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на
+                    якійсь із клітинок, то до відповідної
+                    таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля
+                    назви таблиці з
+                    використанням відповідно доданого для цього атрибута).</p>
+                <div class="review__content">
+                    <div class="table-box">
+                        <h3 class="table-title">
+                            Таблиця 1 (<span class="click-count">0</span>)
+                        </h3>
+                        <table class="matrix"></table>
+                    </div>
+
+                    <div class="table-box">
+                        <h3 class="table-title">
+                            Таблиця 2 (<span class="click-count">0</span>)
+                        </h3>
+                        <table class="matrix"></table>
+                    </div>
+
+                    <div class="table-box">
+                        <h3 class="table-title">
+                            Таблиця 3 (<span class="click-count">0</span>)
+                        </h3>
+                        <table class="matrix"></table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+
+    <script>
+        const tables = document.querySelectorAll('.matrix');
+
+        tables.forEach(table => {
+            for (let i = 0; i < 3; i++) {
+                const tr = document.createElement('tr');
+                for (let j = 0; j < 3; j++) {
+                    const td = document.createElement('td');
+                    td.textContent = Math.floor(Math.random() * 100) + 1;
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr)
+            }
+            // addEventListener на таблицю (bubbling)
+            table.addEventListener('click', function (event) {
+                const td = event.target.closest('td');
+
+                if (!td) return;
+
+                //Забираю рамку у інших таблиць
+                tables.forEach(t => t.classList.remove('table--active'));
+                this.classList.add('table--active')
+
+                // Заголовок
+                const box = this.closest('.table-box');
+                if (!box) return;
+
+                const countSpan = box.querySelector('.click-count')
+                const oldCountValue = parseInt(countSpan.textContent, 10) || 0;
+                const newCountValue = oldCountValue + 1;
+
+                countSpan.textContent = newCountValue;
+            })
+
+        })
+
+
+
+    </script>
+</body>
+
+</html>

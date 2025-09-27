@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task1</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header></header>
+    <main class="main">
+        <section class="hero">
+            <div class="hero__container">
+                <p class="hero__task">Дано 10 рядків тексту «Hello!». При кліку на якийсь із них усі
+                    наступні повинні бути зафарбовані у червоний колір.</p>
+                <ul class="hero__list">
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                    <li class="hero__item1">Hello!</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+
+    <script>
+        const elements = document.querySelectorAll('.hero__item1');
+        const itemsArray = Array.from(elements);
+
+        elements.forEach((item) => {
+            item.addEventListener('click', (e) => {
+                elements.forEach(el => el.style.color = '');
+
+                const index = itemsArray.indexOf(item);
+                
+                for (let i = index; i < itemsArray.length; i++) {
+                    itemsArray[i].style.color = 'red';
+                }
+            })
+        })
+
+    </script>
+</body>
+
+</html>

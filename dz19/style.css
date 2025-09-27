@@ -1,0 +1,107 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: rgba(244, 244, 244, 1);
+}
+
+[class*="__container"] {
+    max-width: 1030px;
+    padding-inline: 15px;
+    margin-inline: auto;
+}
+
+header {
+    padding-top: 10vh;
+
+    .header__title {
+        font-size: 1.875rem;
+        font-weight: 700;
+        text-align: center;
+        padding-block: 1.25rem;
+    }
+}
+
+
+.hero__task,
+.about__task,
+.review__task {
+    font-weight: 700;
+}
+
+.hero__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-block: 1.875rem;
+}
+
+.hero__item1 {
+    cursor: pointer;
+    align-self: start;
+}
+
+.hero__link {
+    color: blue;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: .625rem;
+}
+
+.about__box,
+.review__content {
+    padding-block: 1.25rem;
+}
+
+.item-box__label {
+    margin-bottom: .625rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+}
+
+.item-box__input {
+    border: .0625rem solid grey;
+    border-radius: .3125rem;
+    padding: .3125rem .5rem;
+    max-width: 6.25rem;
+}
+
+.review__content {
+    display: flex;
+    gap: 3.125rem;
+}
+
+.table-title {
+    margin-bottom: .5rem;
+}
+.matrix {
+    border-collapse: collapse;
+}
+.matrix.table--active {
+    outline: .125rem solid red;
+    border-collapse: collapse;
+}
+
+.matrix td {
+    padding: .5rem;
+    border: .0625rem solid #ccc;
+    text-align: center;
+}
+
+.header__container,
+.hero__container,
+.footer__container {
+    background-color: #fff;
+}
+
+.footer {
+    text-align: center;
+
+    .footer__content {
+        padding-block: 1.25rem;
+
+        p {
+            font-size: .875rem;
+            font-weight: 700;
+        }
+    }
+}
