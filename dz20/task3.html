@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_1</title>
+    <link rel="stylesheet" href="reset.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        [class*="__container"] {
+            max-width: 1030px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .page {
+            padding-top: 10svh;
+        }
+        .page__task {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+        .form-user {
+            max-width: 15rem;
+            display: flex;
+            flex-direction: column;
+            gap: .625rem;
+
+            label {
+                display: flex;
+                gap: 1.25rem;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            input {
+                max-width: 6.25rem;
+                border: .0625rem solid black;
+                padding: .1875rem .3125rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header></header>
+    <main>
+
+        <section class="page">
+            <div class="page__container">
+                <p class="page__task">На формі вводять 7 числових значень (вік, зріст, вага, заробітна плата, стаж,
+                    номер
+                    відділу, порядковий номер). Додати
+                    подію обробки події click на форму і якщо клік на внутрішньому input, то автоматично
+                    замінювати значення його на 0.
+                    Використати делегування</p>
+                <form class="form form-user">
+                    <label>Age:
+                        <input class="form-user__age" name="formInput" type="number" value="28">
+                    </label>
+                    <label for="height">Height:
+                        <input class="form-user__height" name="formInput" id="height" type="number" value="178">
+                    </label>
+                    <label for="weight">Weight:
+                        <input class="form-user__weight" name="formInput" id="weight" type="number" value="73">
+                    </label>
+                    <label for="salary">Salary:
+                        <input class="form-user__salary" name="formInput" id="salary" type="number" value="2500">
+                    </label>
+                    <label for="seniority">Seniority:
+                        <input class="form-user__seniority" name="formInput" id="seniority" type="number" value="3">
+                    </label>
+                    <label for="department">Department:
+                        <input class="form-user__department" name="formInput" id="department" type="number" value="1">
+                    </label>
+                    <label for="number">Number:
+                        <input class="form-user__number" name="formInput" id="number" type="number" value="101">
+                    </label>
+                </form>
+            </div>
+        </section>
+
+    </main>
+    <footer></footer>
+
+    <script>
+
+        const form = document.querySelector('.form-user');
+
+        form.addEventListener('click', (e) => {
+            if (e.target.tagName === 'INPUT') {
+                const oldValue = e.target.value;
+
+                e.target.value = 0;
+
+                const inputChangedEvent = new CustomEvent('inputChanged', {
+                    detail: { id: e.target.id, oldValue: oldValue, newValue: e.target.value }
+                })
+                form.dispatchEvent(inputChangedEvent)
+            }
+        })
+        form.addEventListener('inputChanged', (e) => {
+            console.log(`Значення іnput-${e.detail.id}: ${e.detail.oldValue} було змінено на ${e.detail.newValue}`);
+
+        })
+
+    </script>
+</body>
+
+</html>

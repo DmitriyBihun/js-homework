@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_2</title>
+    <link rel="stylesheet" href="reset.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .employee {
+            padding-top: 10svh;
+        }
+
+        .employee__task {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .employee__info {
+            display: flex;
+            flex-direction: column;
+            gap: .625rem;
+
+            .employee__input {
+                max-width: 12.5rem;
+                border: .0625rem solid black;
+                padding: .1875rem .3125rem;
+
+                &::placeholder {
+                    opacity: 0.8;
+                }
+            }
+
+            .employee__title {
+                font-size: 1.25rem;
+                font-weight: 700;
+            }
+
+            .employee__list {
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header></header>
+    <main>
+
+        <section class="employee">
+            <div class="employee__container">
+                <p class="employee__task">Динамічний пошук. Є список працівників і поле пошуку. При введенні
+                    відображаються усі, які містять вказаний фрагмент.</p>
+                <div class="employee__info">
+                    <input type="text" class="employee__input" placeholder="Введіть ім'я">
+                    <h3 class="employee__title">Працівники:</h3>
+                    <ul class="employee__list">
+                        <li class="employee__item">Іванов І. І.</li>
+                        <li class="employee__item">Петов В. І.</li>
+                        <li class="employee__item">Івась Д. І.</li>
+                        <li class="employee__item">Шевченко Т. Г.</li>
+                        <li class="employee__item">Ребров С. С.</li>
+                        <li class="employee__item">Король В. Д.</li>
+                        <li class="employee__item">Будяк М. В.</li>
+                        <li class="employee__item">Власик Д. А.</li>
+                        <li class="employee__item">Бущан Г. М.</li>
+                        <li class="employee__item">Шовковський О. В.</li>
+                        <li class="employee__item">Рибка Р. В.</li>
+                        <li class="employee__item">Кополовець М. М.</li>
+                        <li class="employee__item">Голодюк О. А.</li>
+                        <li class="employee__item">Федецький А. А.</li>
+                        <li class="employee__item">Кобін В. В.</li>
+                        <li class="employee__item">Пятов А. В.</li>
+                        <li class="employee__item">Коноплянка Є. О.</li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </section>
+
+    </main>
+    <footer></footer>
+
+    <script>
+
+        class EmployeeSearch {
+            constructor() {
+                this.input = document.querySelector('.employee__input')
+                this.employeeList = document.querySelector('.employee__list')
+
+                // Зберігаю список прац. в масив.
+                const itemsOfList = document.querySelectorAll('.employee__item')
+                this.employees = Array.from(itemsOfList).map(li => li.textContent)
+            }
+            // Метод фільтрації.
+            filterEmployees() {
+                const inputText = this.input.value.toLowerCase();
+                const filtered = this.employees.filter(name => name.toLowerCase().includes(inputText));
+
+                // CustomEvent з результатом фільтрації.
+                const event = new CustomEvent('updateList', {
+                    detail: { filtered },
+                    bubbles: true
+                })
+                this.employeeList.dispatchEvent(event)
+            }
+            // Метод ініціалізації.
+            init() {
+                this.employeeList.addEventListener('updateList', (e) => {
+                    this.employeeList.innerHTML = '';
+
+                    // Додаю відфільтр. працівників.
+                    e.detail.filtered.forEach(name => {
+                        const li = document.createElement('li');
+                        li.textContent = name;
+                        li.classList.add('employee__item');
+                        this.employeeList.appendChild(li)
+                    })
+                })
+                // Слухаю ввід тексту в поле і визиваю фільтрацію.
+                this.input.addEventListener('input', () => {
+                    this.filterEmployees()
+                })
+            }
+        }
+
+        const search = new EmployeeSearch();
+        search.init()
+
+
+    </script>
+</body>
+
+</html>

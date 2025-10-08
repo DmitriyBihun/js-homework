@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_1</title>
+    <link rel="stylesheet" href="reset.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .product {
+            padding-top: 10svh;
+        }
+
+        .product__task {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .product__btn {
+            border: .0625rem solid black;
+            padding: .1875rem .3125rem;
+            margin-bottom: .625rem;
+        }
+
+        .product__input {
+            max-width: 12.5rem;
+            border: .0625rem solid black;
+
+        }
+
+        .product__div {
+            border: .0625rem solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header></header>
+    <main>
+
+        <section class="product">
+            <div class="product__container">
+                <p class="product__task">111</p>
+                <div class="product__content content-product">
+                    <input class="product__input" type="text">
+                    <button class="product__btn">Показать сообщение</button>
+                    <div class="product__div"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer></footer>
+
+    <script>
+        // 1. На странице есть кнопка и пустой <div>. Когда пользователь кликает на кнопку, нужно создать и отправить кастомное событие showMessage. Слушатель этого события должен показать в < div > текст "Привет от CustomEvent!".
+        /*
+        const btn = document.querySelector('.product__btn')
+        const div = document.querySelector('.product__div')
+
+        btn.addEventListener('click', (e) => {
+            const myEvent = new CustomEvent('showMessage')
+            btn.dispatchEvent(myEvent)
+        })
+        document.addEventListener('showMessage', (e) => {
+            div.innerText = 'Привет от CustomEvent!'
+        })
+        */
+
+        //   ==========================================================================
+        // Задача: «Передай сообщение» На странице есть:
+        // <input> (в него пользователь вводит текст),
+        // <button>,
+        // <div> для вывода результата.
+        // Когда пользователь кликает по кнопке: создаётся кастомное событие showMessage, в detail нужно передать текст, который пользователь ввёл в input. Слушатель showMessage должен: принять событие, взять e.detail и вставить этот текст в div.
+        /*
+
+        const btn = document.querySelector('.product__btn')
+        const div = document.querySelector('.product__div')
+
+        btn.addEventListener('click', (e) => {
+            let inputEl = document.querySelector('.product__input')
+            const myEvent = new CustomEvent('showMessage', {
+                detail: { title: inputEl.value },
+                bubbles: true
+            })
+            btn.dispatchEvent(myEvent)
+        })
+        document.addEventListener('showMessage', (e) => {
+            div.innerText = e.detail.title
+        })
+         */
+    </script>
+</body>
+
+</html>
