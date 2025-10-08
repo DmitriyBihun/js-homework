@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_3</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .date {
+            padding-top: 7svh;
+        }
+
+        .date__container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        input {
+            max-width: 9.375rem;
+            border: .0625rem solid black;
+            padding: .1875rem .3125rem;
+        }
+
+        .btn {
+            border: .0625rem solid black;
+            padding: .1875rem .3125rem;
+        }
+
+        .task6__title {
+            margin-bottom: .625rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="date page">
+            <div class="date__container">
+                <div class="date__task1">
+                    <p class="task1">1. Ви на сайті вже: <span class="task1-sec">0</span></p>
+                </div>
+                <div class="date__task2">
+                    <label class="task2__label">2. Введіть час початку процедури (год:хв)
+                        <input type="time" id="startTime" class="task2__input">
+                    </label>
+                    <button class="task2__btn btn">Перевірити</button>
+                    <p class="task2__res"></p>
+                </div>
+                <div class="date__task3">
+                    <p class="task3">3. До кінця робочого дня (до 17.00) залишилось: <span class="task3__span"></span>
+                    </p>
+                </div>
+                <div class="date__task4">
+                    <label class="task4__label">4. Введи дату і час:
+                        <input type="datetime-local" class="task4__input">
+                    </label>
+                    <button class="task4__btn btn">Перевірити</button>
+                    <p class="task4__res"></p>
+                </div>
+                <div class="date__task5">
+                    <p> 5. <span class="task5__message"></span></p>
+                </div>
+                <div class="date__task6">
+                    <h3 class="task6__title">6. Поточний час:</h3>
+                    <p>Лондон: <span class="task6__london"></span></p>
+                    <p>Париж: <span class="task6__paris"></span></p>
+                    <p>Сідней: <span class="task6__sydney"></span></p>
+                </div>
+                <div class="date__task7">
+                    <h3 class="task7__title">7. Найстарший студент:</h3>
+                    <p class="task7__result"></p>
+                </div>
+                <div class="date__task8">
+                    <h3 class="task8__title">8. Скільки секунд пройшло до першого руху миші:</h3>
+                    <p class="task8__result"><span class="task8__second">0</span></p>
+                </div>
+                <div class="date__task9">
+                    <label class="task9__label">9. Дата початку відпустки:
+                        <input type="date" class="task9__input">
+                    </label>
+                    <button class="task9__btn btn">Перевірити</button>
+                    <p class="task9__res"></p>
+                </div>
+                <div>
+                    <label>
+                        10. Дата виробництва:
+                        <input type="date" id="prodDate">
+                    </label>
+                    <label>
+                        Кількість днів придатності:
+                        <input type="number" id="shelfLife" placeholder="14">
+                    </label>
+                    <button id="checkYogurt" class="btn">Перевірити</button>
+                    <p id="resultYogurt"></p>
+                </div>
+                <div class="date__task11">
+                    <h3 class="task11__title">11. Сформувати масив з 1000 елементів від 1 до 800. Порівняти час
+                        сортування бульбашкою і вставкою.</h3>
+                    <p id="bubbleTime"></p>
+                    <p id="insertionTime"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+
+        //  1. Виводити на екран скільки хвилин користувач вже на сайті
+        const startTime = new Date();
+        const secSpan = document.querySelector('.task1-sec');
+
+        function updateSec() {
+            const currentTime = new Date();
+            const diffMs = currentTime - startTime;
+            const diffSec = Math.floor(diffMs / 1000);
+            secSpan.textContent = diffSec;
+        }
+
+        setInterval(updateSec, 1000);
+        updateSec();
+
+        //  2. Вводимо час початку процедури (процедура триває 30хв). Визначити, чи процедура ще триває.
+        const btnTask2 = document.querySelector('.task2__btn');
+        const resTask2 = document.querySelector('.task2__res');
+
+        btnTask2.addEventListener('click', () => {
+            const input = document.querySelector('.task2__input').value;
+            if (!input) 'Введіть корректне значення.'
+
+            const [hours, minutes] = input.split(':').map(Number);
+
+            const now = new Date();
+            const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+            const endDate = new Date(startDate.getTime() + 30 * 60 * 1000);
+            if (now >= startDate && now < endDate) resTask2.textContent = ('Процедура триває.')
+            else if (now < startDate) resTask2.textContent = ('Процедура не почалась.')
+            else resTask2.textContent = ('Процедура закінчилась.')
+        })
+
+        //  3.  Визначити скільки залишилось до кінця робочого дня (до 17.00)
+        const resSpan = document.querySelector('.task3__span');
+
+        function updateTimeLeft() {
+            const actualTime = new Date();
+            const endTime = new Date(actualTime.getFullYear(), actualTime.getMonth(), actualTime.getDate(), 17, 0, 0);
+            const diffMs = endTime - actualTime;
+
+            if (diffMs <= 0) resSpan.textContent = `Робочий день закінчився.`
+
+            const diffHours = Math.floor(diffMs / 1000 / 60 / 60);
+            const diffMin = Math.floor((diffMs / 1000 / 60) % 60);
+            const diffSec = Math.floor((diffMs / 1000) % 60);
+
+            resSpan.textContent = `${diffHours} год. ${diffMin} хв. ${diffSec} c.`
+        }
+        setInterval(updateTimeLeft, 1000);
+        updateTimeLeft()
+
+        //  4. Створити функцію, яка дозволяє визначити, чи знаходиться вказана дата і час у межах поточного тижня (від понеділка 0 год, 0хв, до неділі 23год.59хв)
+        const inputTask4 = document.querySelector('.task4__input')
+        const btnTask4 = document.querySelector('.task4__btn')
+        const resultTask4 = document.querySelector('.task4__res')
+
+        btnTask4.addEventListener('click', () => {
+            const value = inputTask4.value;
+            if (!value) resultTask4.textContent = 'Будь ласка, введіть дату і час.'
+
+            const dateToCheck = new Date(value);
+            const now = new Date();
+
+            const dayOfWeek = now.getDay();
+
+            const monday = new Date(now);
+            const diffToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+            monday.setDate(now.getDate() - diffToMonday);
+            monday.setHours(0, 0, 0, 0)
+
+            const sunday = new Date(monday);
+            sunday.setDate(monday.getDate() + 6);
+            sunday.setHours(23, 59, 59, 999)
+
+            if (dateToCheck >= monday && dateToCheck <= sunday) resultTask4.textContent = `Дата входить у поточний тиждень.`
+            else resultTask4.textContent = `Дата НЕ входить у поточний тиждень.`
+        })
+
+        //  5. При заході на сайт вітати користувача або відображати повідомлення про те,  скільки хвилин залишилось до початку робочого дня (початок о 8.00).
+        const msg = document.querySelector('.task5__message')
+
+        function showStatus() {
+            const now = new Date();
+
+            const workStartToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0, 0, 0);
+            const diffMs = workStartToday - now;
+
+            if (diffMs <= 0) msg.textContent = `Вітаю! Робочий день вже почався.`
+            else {
+                const minutesLeft = Math.ceil(diffMs / 1000 / 60);
+                msg.textContent = `До початку роб. дня залишилось ${minutesLeft} хв.`
+            }
+        }
+        showStatus()
+
+        // 6. Вивести скільки зараз годин у Лондоні, Парижі, Сіднеї.
+        const londonEl = document.querySelector('.task6__london');
+        const parisEl = document.querySelector('.task6__paris');
+        const sidneyEl = document.querySelector('.task6__sydney');
+
+        function getTimeInZone(timeZone) {
+            const now = new Date();
+            return now.toLocaleTimeString('uk-UA', {
+                timeZone,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+
+        function updateTime() {
+            londonEl.textContent = getTimeInZone('Europe/London');
+            parisEl.textContent = getTimeInZone('Europe/Paris');
+            sidneyEl.textContent = getTimeInZone('Australia/Sydney');
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // 7.  Дано список студентів (ім’я і дата народження: у формі тексту (день.місяць.рік). Знайти найстаршого студента.
+        const students = [
+            { name: 'Олег', birth: '15.08.2002' },
+            { name: 'Дмитро', birth: '11.02.1999' },
+            { name: 'Іван', birth: '1.03.2003' },
+            { name: 'Віталій', birth: '10.01.1999' },
+            { name: 'Микола', birth: '25.01.2003' },
+        ]
+
+        const resultEl = document.querySelector('.task7__result')
+
+        function parseDate(str) {
+            const [day, month, year] = str.split('.').map(Number);
+            return new Date(year, month - 1, day)
+        }
+        let oldestStud = students[0];
+        let oldestDate = parseDate(students[0].birth)
+
+        for (let i = 1; i < students.length; i++) {
+            const currDate = parseDate(students[i].birth);
+            if (currDate < oldestDate) {
+                oldestDate = currDate;
+                oldestStud = students[i]
+            }
+        }
+        resultEl.textContent = `Найстарший студент: ${oldestStud.name} (дата народження: ${oldestStud.birth})`
+
+        //  8.  Визначити скільки пройшло секунд після заходу на сайт перш ніж користувач зробив рух мишкою.
+        const startingTime = new Date();
+        const secondEl = document.querySelector('.task8__second')
+
+        function handleMouseMove() {
+            const now = new Date();
+            const diffSec = Math.floor((now - startingTime) / 1000);
+            secondEl.textContent = diffSec;
+
+            document.removeEventListener('mousemove', handleMouseMove)
+        }
+        document.addEventListener('mousemove', handleMouseMove)
+
+        // 9. Користувачка планувала оформила дектретну відпустку на 200 днів (дата початку відпустки вводиться). Визначити чи відпустка вже триває і чи не закінчилась.
+        const inputTask9 = document.querySelector('.task9__input')
+        const btnTask9 = document.querySelector('.task9__btn')
+        const resTask9 = document.querySelector('.task9__res')
+
+        btnTask9.addEventListener('click', () => {
+            const value = inputTask9.value;
+            if (!value) {
+                resTask9.textContent = "Будь ласка, введіть дату початку відпустки."
+                return
+            }
+
+            const startVacDate = new Date(value);
+            const endVacDate = new Date(startVacDate);
+            endVacDate.setDate(startVacDate.getDate() + 200)
+
+            const now = new Date();
+
+            if (now < startVacDate) {
+                resTask9.textContent = `Відпустка ще не почалась.`;
+            } else if (now >= startVacDate && now <= endVacDate) {
+                resTask9.textContent = `Відпустка триває.`;
+            } else {
+                resTask9.textContent = `Відпустка закінчилась.`;
+            }
+        })
+
+        // 10. Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент.
+        const prodInput = document.getElementById('prodDate');
+        const shelfInput = document.getElementById('shelfLife');
+        const btn = document.getElementById('checkYogurt');
+        const restEl = document.getElementById('resultYogurt');
+
+        btn.addEventListener('click', () => {
+            const productValue = prodInput.value;
+            const shelfValue = Number(shelfInput.value)
+
+            if (!productValue || !shelfValue) restEl.textContent = `Bведіть дату виробництва та кількість днів придатності`;
+
+            const prodDate = new Date(productValue);
+            const expiryDate = new Date(prodDate);
+            expiryDate.setDate(prodDate.getDate() + shelfValue);
+
+            const now = new Date();
+
+            if (now <= expiryDate) {
+                restEl.textContent = `Йогурт придатний до вживання. (Термін дії до ${expiryDate.toLocaleDateString('uk-UA')})`;
+            }
+            else {
+                restEl.textContent = `Йогурт не придатний. (Термін дії закінчився ${expiryDate.toLocaleDateString('uk-UA')})`;
+            }
+        })
+
+        // 11.  Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і  вставкою.
+        const arr = Array.from({ length: 1000 }, () => Math.floor(Math.random() * 800) + 1);
+
+        const arrBubble = [...arr]
+        const arrInsertion = [...arr]
+
+        function bubbleSort(array) {
+            const n = array.length;
+
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - 1; j++) {
+                    if (array[j] > array[j + 1]) {
+                        [array[j], array[j + 1]] = [array[j + 1], array[j]];
+                    }
+                }
+            }
+        }
+        function insertionSort(array) {
+            for (let i = 1; i < array.length; i++) {
+                const key = array[i];
+                let j = i - 1;
+                while (j > 0 && array[j] > key) {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+                array[j + 1] = key;
+            }
+        }
+        const bubbleEl = document.getElementById('bubbleTime');
+        const insertionEl = document.getElementById('insertionTime');
+
+        let startB = Date.now();
+        bubbleSort(arrBubble);
+        let endB = Date.now();
+        bubbleEl.textContent = `Час сортування бульбашкою: ${endB - startB} мс`;
+
+        let startI = Date.now();
+        insertionSort(arrInsertion);
+        let endI = Date.now();
+        insertionEl.textContent = `Час сортування вставкою: ${endI - startI} мс`;
+    </script>
+</body>
+
+</html>

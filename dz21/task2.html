@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_2</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .client {
+            padding-top: 7svh;
+        }
+        .client__container {
+            p {
+                text-decoration: underline;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="client page">
+            <div class="client__container">
+                <p>Рішення задачі у консолі.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+
+        class Client {
+            constructor(id, name, amountMoney) {
+                this.id = id
+                this.name = name
+                this.amountMoney = amountMoney
+            }
+            addMoney(someMoney) {
+                this.amountMoney += someMoney
+            }
+            withdrawMoney(someMoney) {
+                this.amountMoney -= someMoney
+            }
+            toString() {
+                return `ID: ${this.id}, Name: ${this.name}. Актуальна сума на рахунку: ${this.amountMoney}`
+            }
+        }
+        class GoldenClient extends Client {
+            constructor(id, name, amountMoney, creditLimit, creditPercent) {
+                super(id, name, amountMoney)
+                this.creditLimit = creditLimit
+                this.creditPercent = creditPercent
+                this.initialCreditLimit = creditLimit
+            }
+            withdrawMoney(someMoney) {
+                if (someMoney <= this.amountMoney) {
+                    this.amountMoney -= someMoney
+                }
+                else if (someMoney <= this.amountMoney + this.creditLimit) {
+                    const remaining = someMoney - this.amountMoney;
+                    this.amountMoney = 0;
+                    this.creditLimit -= remaining
+                }
+                else {
+                    console.log('Ліміт перевищено');
+                }
+            }
+            calculatePenalty() {
+                const usedCredit = this.initialCreditLimit - this.creditLimit;
+                if (usedCredit > 0) {
+                    return (usedCredit * this.creditPercent) / 100;
+                }
+                return 0;
+            }
+            toString() {
+                return `ID: ${this.id}, Name: ${this.name}, Balance: ${this.amountMoney}, Credit left: ${this.creditLimit}, Credit Percent: ${this.creditPercent}, Penalty: ${this.calculatePenalty()}`
+            }
+        }
+
+        const client1 = new Client(111, 'Dmytro Bihun', 1500)
+        client1.addMoney(400)
+        console.log(client1.toString());
+        client1.withdrawMoney(1000)
+        console.log(client1.toString());
+        console.log('============================================================================================================');
+
+        const goldClient1 = new GoldenClient(222, 'Jeremain Lens', 2000, 500, 10)
+        goldClient1.withdrawMoney(800)
+        console.log(goldClient1.toString());
+        console.log(goldClient1.calculatePenalty());
+        goldClient1.withdrawMoney(1400)
+        console.log(goldClient1.toString());
+        console.log(goldClient1.calculatePenalty());
+        goldClient1.withdrawMoney(1000)
+
+
+    </script>
+</body>
+
+</html>

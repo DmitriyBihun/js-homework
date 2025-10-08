@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_1</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .study {
+            padding-top: 7svh;
+        }
+
+        .study__form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+
+            .form-content {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                .form-month__label,
+                .form-grade__label {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                }
+
+                .form-month__input,
+                .form-grade__input {
+                    padding: .1875rem .3125rem;
+                    border: .0625rem solid black;
+                    max-width: 9.375rem;
+                    border-radius: .3125rem;
+                }
+            }
+
+            .form__btn {
+                align-self: start;
+                border-radius: .3125rem;
+                padding: .1875rem .3125rem;
+                border: .0625rem solid black;
+                transition: background-color .3s ease;
+
+                &:hover {
+                    background-color: rgb(208, 208, 208);
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="study page">
+            <div class="study__container">
+                <form class="study__form form">
+                    <div class="form-content content-form form-month">
+                        <label for="month" class="form-month__label">Month:</label>
+                        <input type="number" id="month" class="form-month__input">
+                    </div>
+                    <div class="form-content content-form form-grade">
+                        <label for="grade" class="form-grade__label">Grade:</label>
+                        <input type="number" id="grade" class="form-grade__input">
+                    </div>
+                    <button class="form__btn">Let's check</button>
+                </form>
+                <div class="study__answer"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+
+        class IsNotNumberError extends Error {
+            constructor() {
+                super()
+                this.message = 'Значення повинно бути числом!'
+                this.name = 'IsNotNumberError'
+            }
+        }
+        class MinMonthError extends Error {
+            constructor() {
+                super()
+                this.message = 'Номер місяця повинен бути не менше 1!'
+                this.name = 'MinMonthError'
+            }
+        }
+        class MaxMonthError extends Error {
+            constructor() {
+                super()
+                this.message = 'Номер місяця повинен бути не більше 12!'
+                this.name = 'MaxMonthError'
+            }
+        }
+        class VacationMonthError extends Error {
+            constructor() {
+                super()
+                this.message = 'Літні місяці (червень, липень, серпень) не є навчальними!'
+                this.name = 'VacationMonthError'
+            }
+        }
+        class MinGradeError extends Error {
+            constructor() {
+                super()
+                this.message = 'Оцінка повинна бути більшою або дорівнювати 1!'
+                this.name = 'MinGradeError'
+            }
+        }
+        class MaxGradeError extends Error {
+            constructor() {
+                super()
+                this.message = 'Оцінка не повинна перевищувати 100!'
+                this.name = 'MaxGradeError'
+            }
+        }
+
+        function checkMonth(month) {
+            if (isNaN(month)) {
+                throw new IsNotNumberError();
+            }
+            if (month < 1) {
+                throw new MinMonthError();
+            }
+            if (month > 12) {
+                throw new MaxMonthError();
+            }
+            if (month === 6 || month === 7 || month === 8) {
+                throw new VacationMonthError();
+            }
+            console.log('Місяць введений правильно.');
+        }
+        function checkGrade(grade) {
+            if (isNaN(grade)) {
+                throw new IsNotNumberError();
+            }
+            if (grade < 1) {
+                throw new MinGradeError();
+            }
+            if (grade > 100) {
+                throw new MaxGradeError();
+            }
+            console.log('Оцінка введена правильно.');
+        }
+        function canBeImproved(month, grade) {
+            const BAD_GRADE = 60;
+            const MONTH_5 = 5;
+            const MONTH_12 = 12;
+
+            if (grade <= BAD_GRADE && month !== MONTH_5 && month !== MONTH_12) {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        function formHandler(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const month = parseInt(form.querySelector('.form-month__input').value)
+            const grade = parseInt(form.querySelector('.form-grade__input').value)
+            const answer = document.querySelector('.study__answer')
+
+            try {
+                checkMonth(month);
+                checkGrade(grade);
+
+                if (canBeImproved(month, grade)) {
+                    answer.textContent = 'Оцінка погана, можна виправити.'
+                }
+                else {
+                    answer.textContent = 'Оцінка добра, виправляти не потрібно.'
+                }
+            }
+            catch (err) {
+                answer.textContent = err.message;
+            }
+        }
+
+        window.onload = function () {
+            const form = document.querySelector('.study__form');
+            if (form) form.onsubmit = formHandler;
+        }
+
+    </script>
+</body>
+
+</html>
