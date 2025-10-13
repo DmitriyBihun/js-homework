@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_2</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .work {
+            padding-top: 7svh;
+        }
+
+        .swork__container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .work__label {
+            .work__input {
+                max-width: 18.75rem;
+                border: .0625rem solid black;
+                padding: .1875rem .3125rem;
+            }
+        }
+
+        .work__btn {
+            border: .0625rem solid black;
+            padding: .1875rem .3125rem;
+            transition: background-color .3s ease;
+            align-self: start;
+
+            &:hover {
+                background-color: rgb(209, 209, 209);
+            }
+        }
+        .work__tasks p{
+            margin-bottom: .625rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="work page">
+            <div class="swork__container">
+                <label class="work__label">
+                    <input type="text" class="work__input" placeholder="Ранкова пробіжка.">
+                </label>
+                <button class="work__btn">Додати</button>
+                <div class="work__tasks"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+
+        class App {
+            constructor() {
+                this.input = document.querySelector('.work__input')
+                this.btn = document.querySelector('.work__btn')
+                this.tasks = document.querySelector('.work__tasks')
+                this.taskList = JSON.parse(localStorage.getItem('tasks')) || []
+
+                this.btn.addEventListener('click', this.addTask.bind(this))
+                this.taskCreator()
+                this.nextTaskChecker()
+            }
+            addTask() {
+                const inputValue = this.input.value;
+                if (!inputValue) return
+
+                this.taskList.push(inputValue);
+                localStorage.setItem('tasks', JSON.stringify(this.taskList));
+                this.taskCreator();
+
+                this.input.value = ''
+            }
+            taskCreator() {
+                this.tasks.innerHTML = '';
+                this.taskList.forEach(task => {
+                    const p = document.createElement('p');
+                    p.textContent = task;
+                    this.tasks.appendChild(p);
+                });
+            }
+            showRandTask() {
+                if (this.taskList.length > 0) {
+                    const randomTaskIndex = Math.floor(Math.random() * this.taskList.length);
+                    const randomTask = this.taskList[randomTaskIndex];
+                    const isDone = confirm(randomTask)
+
+                    if (isDone) {
+                        this.taskList.splice(randomTaskIndex, 1);
+                        localStorage.setItem('tasks', JSON.stringify(this.taskList));
+                        this.taskCreator()
+                    }
+                }
+                this.nextTaskChecker()
+            }
+            nextTaskChecker() {
+                setTimeout(this.showRandTask.bind(this), 7000)
+            }
+        }
+
+        const app1 = new App()
+
+    </script>
+</body>
+
+</html>
