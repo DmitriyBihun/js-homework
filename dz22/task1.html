@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_1</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .study {
+            padding-top: 7svh;
+        }
+
+        .study__input {
+
+            max-width: 3rem;
+            border: .0625rem solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="study page">
+            <div class="study__container">
+                <input class="study__input" type="color" value="#e66465">
+                <p class="study__count"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+
+        const colorInput = document.querySelector('.study__input')
+        const count = document.querySelector('.study__count')
+
+        let changeColor = 0;
+
+        let savedColor = localStorage.getItem('bgColor');
+        if (savedColor) document.body.style.backgroundColor = savedColor;
+
+        colorInput.addEventListener('input', () => {
+            const currColor = colorInput.value;
+
+            document.body.style.backgroundColor = currColor;
+            localStorage.setItem('bgColor', currColor)
+
+            changeColor++
+            count.textContent = `Змін: ${changeColor}`
+        })
+
+    </script>
+</body>
+
+</html>
