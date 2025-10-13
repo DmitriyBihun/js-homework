@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_3</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .hero {
+            padding-top: 7svh;
+        }
+
+        .hero__list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            .item-hero__title {
+                font-weight: 700;
+                margin-bottom: .5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="hero page">
+            <div class="hero__container">
+                <ol class="hero__list">
+                    <li class="hero__item item-hero item-hero1">
+                        <h3 class="item-hero__title">Задача 1. Дано масив рядків. Вивести ті, у яких є цифри
+                            (використати метод test та регулярні вирази).</h3>
+                        <div class="item-hero__res1"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero2">
+                        <h3 class="item-hero__title">Задача 2. Дано масив рядків. Вивести ті, у яких немає цифр.</h3>
+                        <div class="item-hero__res2"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero3">
+                        <h3 class="item-hero__title">Задача 3. Дано масив рядків. Вивести ті, у яких є голосні літери.
+                        </h3>
+                        <div class="item-hero__res3"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero4">
+                        <h3 class="item-hero__title">Задача 4. Дано масив рядків. Вивести ті, у яких немає голосних
+                            літер.</h3>
+                        <div class="item-hero__res4"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero5">
+                        <h3 class="item-hero__title">Задача 5. Дано масив рядків. Вивести ті, у яких є або цифра 1 або
+                            цифра 3.</h3>
+                        <div class="item-hero__res5"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero6">
+                        <h3 class="item-hero__title">Задача 6. Дано рядок тексту, вивести усі числа, які є у тексті.
+                        </h3>
+                        <div class="item-hero__res6"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero7">
+                        <h3 class="item-hero__title">Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були
+                            використано.
+                        </h3>
+                        <div class="item-hero__res7"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero8">
+                        <h3 class="item-hero__title">Задача 8. Дано рядок тексту. Вивести усі складові, які розділені
+                            розділовими знаками.
+                        </h3>
+                        <div class="item-hero__res8"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero9">
+                        <h3 class="item-hero__title">Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у
+                            форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+                        </h3>
+                        <div class="item-hero__res9"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero10">
+                        <h3 class="item-hero__title">Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових
+                            чисел у рядку.
+                        </h3>
+                        <div class="item-hero__res10"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero11">
+                        <h3 class="item-hero__title">Визначити чи може бути рядок тексту номером банківської картки
+                            (приклад: «4142-3433-2323-3434» ). Знайти усі такі номери
+                            (при цьому символи “-” можуть бути, а можуть і не бути, тобто так «4142343323233434».)
+                        </h3>
+                        <div class="item-hero__res11"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero12">
+                        <h3 class="item-hero__title">Задача 12. Дано адресу сайту. Визначити, чи є він урядовим (містить
+                            домен “gov”, але не обов”язково у кінці). Наприклад:
+                            “https://company.gov.ua”
+                        </h3>
+                        <div class="item-hero__res12"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero13">
+                        <h3 class="item-hero__title">Задача 13. Вибрати усі роки між 2020 та 2049 з отриманого
+                            повідомлення
+                        </h3>
+                        <div class="item-hero__res13"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero14">
+                        <h3 class="item-hero__title">Задача 14. Дано номер телефону. Перевірити, чи є цей телефон телефоном оператора Киїівстар.
+                        </h3>
+                        <div class="item-hero__res14"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero15">
+                        <h3 class="item-hero__title">Задача 15. Користувач вводить прізвище та ім’я в одному рядку через пробіл. Замінити пробіл на дефіс.
+                        </h3>
+                        <div class="item-hero__res15"></div>
+                    </li>
+                    <li class="hero__item item-hero item-hero16">
+                        <h3 class="item-hero__title">Задача 16. Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі
+                        «місяць/рік»
+                        </h3>
+                        <div class="item-hero__res16"></div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+        // Задача 1. Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази).
+        const names = ["Dmytro", "Dmytro1", "Dima123", "Dim", "DimDim", "123Dmytro123", "Dmytr0", "Dmytro987"]
+        const result1 = document.querySelector('.item-hero__res1');
+
+        names.forEach(name => {
+            if (/\d/.test(name)) {
+                const p1 = document.createElement('p');
+                p1.textContent = name;
+                result1.appendChild(p1)
+            }
+        })
+
+        // Задача 2. Дано масив рядків. Вивести ті, у яких немає цифр.
+        const result2 = document.querySelector('.item-hero__res2');
+
+        names.forEach(n => {
+            if (/^\D+$/.test(n)) {
+                const p2 = document.createElement('p');
+                p2.textContent = n;
+                result2.appendChild(p2)
+            }
+        })
+
+        // Задача 3. Дано масив рядків. Вивести ті, у яких є голосні літери.
+        const someArr = ['Gtr', 'BMW', 'Tesla', 'MG', 'Audi', 'BYD', 'KIA', 'Shkr'];
+        const result3 = document.querySelector('.item-hero__res3');
+
+        someArr.forEach(word => {
+            if (/[aeiouy]/i.test(word)) {
+                const p3 = document.createElement('p');
+                p3.textContent = word;
+                result3.appendChild(p3);
+            }
+        });
+
+        // Задача 4. Дано масив рядків. Вивести ті, у яких немає голосних літер.
+        const result4 = document.querySelector('.item-hero__res4');
+
+        someArr.forEach(w => {
+            if (!/[aeiouy]/i.test(w)) {
+                const p4 = document.createElement('p');
+                p4.textContent = w;
+                result4.appendChild(p4);
+            }
+        });
+
+        // Задача 5. Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3.
+        const arr = ["Dmytro", "Dim3", "Test1", "Test13", "abc", "3dogs", "one", "FourРundred"];
+        const result5 = document.querySelector('.item-hero__res5');
+
+        arr.forEach(str => {
+            if (/[13]/.test(str)) {
+                const p5 = document.createElement('p');
+                p5.textContent = str;
+                result5.appendChild(p5);
+            }
+        });
+
+        // Задача 6. Дано рядок тексту, вивести усі числа, які є у тексті.
+        const text = 'In 2013, Mesut Özil signed for Arsenal in a transfer worth up to 42.5 million £ (€50 million), becoming the most expensive German player ever at the time. It was also a club-record transfer fee for Arsenal until 2017.'
+
+        const result6 = document.querySelector('.item-hero__res6');
+        const regex = /\d+/g;
+        const numbers = text.match(regex);
+
+        if (numbers) {
+            numbers.forEach(num => {
+                const p6 = document.createElement('p');
+                p6.textContent = num;
+                result6.appendChild(p6)
+            })
+        } else {
+            result6.textContent = `There are no numbers in the text.`
+        }
+
+        // Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.
+        const someText = 'Did you know this? In 2013, Mesut Özil signed for Arsenal in a transfer worth up to €50 million!, becoming the most expensive German player ever at the time. It was also a club-record transfer fee for Arsenal until 2017.'
+        const result7 = document.querySelector('.item-hero__res7');
+
+        const regex7 = /[.,!?;:()\[\]{}'"—…]/g;
+
+        const punctuation = someText.match(regex7);
+        if (punctuation) {
+            result7.textContent = punctuation.join(' - ')
+        } else {
+            result7.textContent = "No punctuation found.";
+        }
+
+        // Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
+        const text8 = "Hello! How are you doing? I hope everything's fine... Let's meet at 5:00 p.m.; don't be late.";
+        const result8 = document.querySelector('.item-hero__res8');
+
+        const parts = text8.split(/[.,!?;:()\[\]{}'"—…]/);
+
+        const cleanParts = parts.map(p => p.trim()).filter(p => p.length > 0);
+
+        result8.textContent = cleanParts.join(', ')
+
+        // Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+        const text9 = `Today, 13.10.2025, it's very rainy. I don't like this.`
+        const result9 = document.querySelector('.item-hero__res9');
+
+        const example = /\b\d{2}\.\d{2}\.\d{4}\b/;
+
+        if (example.test(text9)) {
+            result9.textContent = `Текст містить дату у форматі dd.mm.yyyy`
+        }
+        else {
+            result9.textContent = `Дату у форматі dd.mm.yyyy не знайдено`
+        }
+
+        // Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.
+        const text10 = `In 2025, I read 25 books and did 12 projects.`;
+        const result10 = document.querySelector('.item-hero__res10');
+
+        const exmpl = /\b\d{2}\b/g;
+        const matches = text10.match(exmpl);
+
+        if (matches) result10.textContent = `Кількість двоцифрових чисел: ${matches.length} - ${matches.join(', ')}`
+        else result10.textContent = `Двоцифрових чисел не знайдено`;
+
+        // Задача 11. Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434» ). Знайти усі такі номери (при цьому символи “-” можуть бути, а можуть і не бути, тобто так «4142343323233434».)
+        const text11 = `My cards: 4142343323233434, 4142-3433-2323-3434 and test 1234-5678-90.`;
+        const result11 = document.querySelector('.item-hero__res11');
+
+        const template = /\b(\d{4}-?){4}\b/g;
+
+        const found = text11.match(template)
+        if (found) result11.textContent = `Знайдено номери карток: ${found.join(', ')}`;
+        else result11.textContent = `Номерів карток не знайдено`;
+
+        // Задача 12. Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”, але не обов”язково у кінці). Наприклад: “https://company.gov.ua”
+        const text12 = `https://company.gov.ua`
+        const result12 = document.querySelector('.item-hero__res12');
+
+        if (/\bgov\b/.test(text12)) result12.textContent = `Це урядовий сайт`;
+        else result12.textContent = `Це не урядовий сайт`;
+
+        // Задача 13. Вибрати усі роки між 2020 та 2049 з отриманого повідомлення
+        text13 = `Since 2020, the Italian company that produces expensive sports cars under the Lamborghini brand has released several premium models: the 2020 Sian, the 2021 Essenza SCV12, the 2022 Countach LPI 800-4, the 2023 Revuelto, and the 2024 Temerario.`
+        const result13 = document.querySelector('.item-hero__res13');
+
+        const tmplt = /\b(202[0-9])|203[0-9]|204[0-9]\b/g;
+        const years = text13.match(tmplt);
+        if (years) result13.textContent = `Знайдено роки: ${years.join(', ')}`;
+        else result13.textContent = `Років у діапазоні 2020-2049 не знайдено`;
+
+        // Задача 14. Дано номер телефону. Перевірити, чи є цей телефон телефоном оператора Киїівстар
+        const phoneNumb = `+380981234567`;
+        const result14 = document.querySelector('.item-hero__res14');
+
+        const pattern = /^(?:\+380)?(67|68|96|97|98)\d{7}$/;
+        if(pattern.test(phoneNumb)) result14.textContent = `Це телефон Київстар`;
+        else result14.textContent = `Це не телефон Київстар`;
+
+        // Задача 15. Користувач вводить прізвище та ім’я в одному рядку через пробіл.  Замінити пробіл на дефіс.
+        const result15 = document.querySelector('.item-hero__res15');
+        const userName = prompt('Write your name and surname.')
+        const newUserName = userName.replace(/ /g, '-')
+        result15.textContent = `Your name: ${newUserName}`
+
+        // Задача 16. Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «місяць/рік»
+        const result16 = document.querySelector('.item-hero__res16');
+        const userDate = prompt('Введіть дату у форматі день.місяць.рік (наприклад: 13.10.2025)')
+
+        if(userDate) {
+            const newDate = userDate.replace(/(\d{1,2})\.(\d{1,2})\.(\d{4})/, "$2/$3");
+            result16.textContent = `Місяць/Рік: ${newDate}`;
+        } else {
+            result16.textContent = 'Дата не введена';
+        }
+
+
+    </script>
+</body>
+
+</html>
