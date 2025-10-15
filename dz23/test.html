@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        /*
+        class Rectangle {
+            constructor(width, height) {
+                this.width = width
+                this.height = height
+            }
+            area() {
+                return this.width * this.height
+            }
+            perimeter() {
+                return 2 * (this.width + this.height)
+            }
+            scale(factor) {
+                this.width *= factor
+                this.height *= factor
+            }
+            [Symbol.toPrimitive](hint) {
+                if (hint === 'string') {
+                    return `Rectangle ${this.width} x ${this.height}`
+                }
+                else if (hint === 'number') {
+                    return this.area()
+                }
+            }
+        }
+        const rect = new Rectangle(10, 12)
+        console.log(`${rect}`);
+        console.log(+rect);
+        rect.scale(3)
+        console.log(+rect);
+        */
+
+        // class Book {
+        //     constructor(title, author, pages) {
+        //         this.title = title
+        //         this.author = author
+        //         this.pages = pages
+        //     }
+        //     summary() {
+        //         return `Назва: ${this.title}, Автор: ${this.author}, К-сть сторінок: ${this.pages}`
+        //     }
+        //     [Symbol.toPrimitive](hint) {
+        //         if (hint === 'string' || hint === 'default') {
+        //             return this.summary()
+        //         }
+        //         else if (hint === 'number') {
+        //             return this.pages
+        //         }
+        //     }
+        // }
+        // const b = new Book('Some Book', 'D-B', 150)
+        // console.log(`${b}`);
+        // console.log(+b);
+
+        // class BankAccount {
+        //     constructor(owner, balance) {
+        //         this.owner = owner
+        //         this.balance = balance
+        //     }
+        //     deposit(amount) {
+        //         this.balance += amount
+        //     }
+        //     withdraw(amount) {
+        //         if (this.balance >= amount) {
+        //             this.balance -= amount
+        //         }
+        //         else {
+        //             console.log(`Не вистачає коштів на балансі`);
+        //         }
+        //     }
+        //     [Symbol.toPrimitive](hint) {
+        //         if (hint === 'string' || hint === 'default') {
+        //             return `Власник: ${this.owner}, Баланс: ${this.balance}`
+        //         }
+        //         else if (hint === 'number') {
+        //             return this.balance
+        //         }
+        //     }
+        // }
+        // const bA = new BankAccount('Dmytro', 2000);
+        // bA.deposit(700)
+        // console.log(bA);
+        // bA.withdraw(2700)
+        // console.log(`${bA}`);
+
+
+        // class Temperature {
+        //     constructor(temp) {
+        //         this.temp = temp
+        //     }
+        //     toFahrenheit() {
+        //         return this.temp * 1.8 + 32
+        //     }
+        //     toKelvin() {
+        //         return this.temp + 273.15
+        //     }
+        //     setFromFahrenheit(value) {
+        //         return this.temp = (value - 32) * 5/9
+        //     }
+        //     setFromKelvin(value) {
+        //         return this.temp = value - 273.15
+        //     }
+        //     [Symbol.toPrimitive](hint) {
+        //         if (hint === 'string' || hint === 'default') {
+        //             return `Temperature: ${this.temp.toFixed(1)} °C`
+        //         }
+        //         else if (hint === 'number') {
+        //             return this.temp
+        //         }
+        //     }
+        // }
+
+        // const t1 = new Temperature(20)
+        // console.log(t1.setFromFahrenheit(60));
+
+        class CurrencyConverter {
+            constructor(amount) {
+                this.amount = amount
+            }
+            toUSD() {
+                return this.amount / 40
+            }
+            toEUR() {
+                return this.amount / 43
+            }
+            toPLN() {
+                return this.amount / 10
+            }
+            [Symbol.toPrimitive](hint) {
+                if (hint === 'string' || hint === 'default') {
+                    return `Сума: ${this.amount} грн`
+                }
+                else if (hint === 'number') {
+                    return this.amount
+                }
+            }
+            static fromUSD(value) {
+                return new CurrencyConverter(value * 40)
+            }
+            static fromEUR(value) {
+                return new CurrencyConverter(value * 43);
+            }
+
+            static fromPLN(value) {
+                return new CurrencyConverter(value * 10);
+            }
+        }
+        const money = new CurrencyConverter(4000)
+        console.log(`${money}`);
+        console.log(money.toPLN());
+        const fromDollar = CurrencyConverter.fromUSD(15)
+        console.log(`${fromDollar}`);
+        
+        
+    </script>
+</body>
+
+</html>

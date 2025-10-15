@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_2</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .review {
+            padding-top: 7svh;
+        }
+        .review__title {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+        .review__task p {
+            margin-bottom: .625rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="review page">
+            <div class="review__container">
+                <h4 class="review__title">Задача 3. Створити генератор, який би випадковим чином поступово генерував
+                вказану кількість парних чисел.</h4>
+                <div class="review__task"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+
+        const container = document.querySelector('.review__task')
+
+        function showResult(container, text) {
+                const p = document.createElement('p')
+                p.textContent = text;
+                container.appendChild(p)
+            }
+
+        function* generatorEvenNumbers(quantity) {
+            let counter = 0;
+
+            while (counter < quantity) {
+                const randNumb = Math.floor(Math.random() * 100) + 1;
+                if(randNumb % 2 === 0) {
+                    yield randNumb;
+                    counter++
+                }
+            }
+        }
+
+        const generator = generatorEvenNumbers(8);
+
+        for (const n of generator) {
+            showResult(container, n)
+        }
+        
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_4</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .testim {
+            padding-top: 7svh;
+        }
+
+        .testim__list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            .item-testim__title {
+                font-weight: 700;
+                margin-bottom: .5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="testim page">
+            <div class="testim__container">
+                <ol class="testim__list">
+                    <li class="testim__item item-testim item-testim1">
+                        <h3 class="item-testim__title">1. Дано список з віком учнів. Підрахувати скільки разів кожне
+                            значення зустрічається у
+                            списку і максимальне.</h3>
+                        <div class="item-testim__res1"></div>
+                    </li>
+                    <li class="testim__item item-testim item-testim2">
+                        <h3 class="item-testim__title">2. Дано масив книг (назва, рік видання, автор). Підрахувати
+                            кількість книг для кожного автора..</h3>
+                        <div class="item-testim__res2"></div>
+                    </li>
+                    <li class="testim__item item-testim item-testim3">
+                        <h3 class="item-testim__title">3. Дано інформацію про відвідувачів деякого сайту (для кожного
+                            відвідувача зберігається логін). Підрахувати для кожного
+                            клієнта кількість відвідувань.</h3>
+                        <div class="item-testim__res3"></div>
+                    </li>
+                    <li class="testim__item item-testim item-testim4">
+                        <h3 class="item-testim__title">4. Дано масив студентів (піб, курс, факультет). Підрахувати
+                            кількість різних факультетів, та кількість студентів кожного з
+                            курсів.</h3>
+                        <div class="item-testim__res4"></div>
+                    </li>
+                    <li class="testim__item item-testim item-testim5">
+                        <h3 class="item-testim__title">5. Дано масив показів температур. Підрахувати кількість входжень
+                            кожного із показів let temperatures = [12.4, 24.9, 10.6,
+                            12.4, 24.9, 12.4, 10.6, 11.9] Заокруглити вверх значення та підрахувати кількість різних
+                            показів..</h3>
+                        <div class="item-testim__res5"></div>
+                    </li>
+                    <li class="testim__item item-testim item-testim6">
+                        <h3 class="item-testim__title">6. Дано два списки прізвищ студентів, що відвідують гуртки з
+                            математики і історії. Підрахувати скільки студентів з гуртка з
+                            історії також відвідують гурток з математики. Також підрахувати скільки всього студентів
+                            відвідують хоча б один гурток.</h3>
+                        <div class="item-testim__res6"></div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+        // 1. Дано список з віком учнів. Підрахувати скільки разів кожне значення зустрічається у списку і максимальне.
+        const ages = [16, 18, 12, 16, 17, 14, 18, 13, 14, 12, 16, 15, 16, 14]
+        const result1 = document.querySelector('.item-testim__res1');
+
+        const m = new Map();
+        for (const el of ages) {
+            if (m.has(el)) {
+                m.set(el, m.get(el) + 1)
+            }
+            else {
+                m.set(el, 1)
+            }
+        }
+
+        let countsStr = '';
+        for (const [age, count] of m) {
+            countsStr += `Вік ${age} - ${count}<br>`
+        }
+        const maxAge = Math.max(...m.keys())
+
+        result1.innerHTML = countsStr + `<strong>Максимальний вік: ${maxAge} </strong>`
+
+        // 2. Дано масив книг (назва, рік видання, автор). Підрахувати кількість книг для кожного автора.
+        const result2 = document.querySelector('.item-testim__res2');
+
+        const books = [
+            { title: "Книга A", year: 2001, author: "Автор 1" },
+            { title: "Книга B", year: 1999, author: "Автор 2" },
+            { title: "Книга C", year: 2005, author: "Автор 1" },
+            { title: "Книга D", year: 2010, author: "Автор 3" },
+            { title: "Книга E", year: 2001, author: "Автор 2" }
+        ]
+
+        const authorCount = new Map();
+
+        for (const book of books) {
+            const author = book.author
+            if (authorCount.has(author)) {
+                authorCount.set(author, authorCount.get(author) + 1)
+            }
+            else {
+                authorCount.set(author, 1)
+            }
+        }
+
+        let raw = '';
+        for (const [author, count] of authorCount) {
+            raw += ` ${author}: ${count}<br>`
+        }
+        result2.innerHTML = raw
+
+        // 3. Дано інформацію про відвідувачів деякого сайту (для кожного відвідувача зберігається логін). Підрахувати для кожного клієнта кількість відвідувань.
+        const result3 = document.querySelector('.item-testim__res3');
+        const logins = ["user1", "user2", "user1", "user3", "user2", "user1"]
+
+        const visitedCount = new Map();
+        for (const login of logins) {
+            if (visitedCount.has(login)) {
+                visitedCount.set(login, visitedCount.get(login) + 1);
+            } else {
+                visitedCount.set(login, 1);
+            }
+        }
+        let output = '';
+        for (const [login, count] of visitedCount) {
+            output += `Користувач: ${login} - ${count}<br>`
+        }
+        result3.innerHTML = output;
+
+        // 4.  Дано масив студентів (піб, курс, факультет). Підрахувати кількість різних факультетів, та кількість студентів кожного з курсів. 
+        const result4 = document.querySelector('.item-testim__res4');
+        const students = [
+            { name: "Іван Іванов", course: 1, faculty: "Фізичний" },
+            { name: "Марія Петрова", course: 2, faculty: "Хімічний" },
+            { name: "Олег Коваль", course: 1, faculty: "Фізичний" },
+            { name: "Світлана Орлова", course: 3, faculty: "Біологічний" },
+            { name: "Микола Брик", course: 2, faculty: "Фізичний" },
+            { name: "Выктор Мосійчук", course: 1, faculty: "Математичний" },
+        ];
+
+        const facultySet = new Set();
+        for (const stud of students) {
+            facultySet.add(stud.faculty)
+        }
+        const fucultiesCount = facultySet.size;
+
+        const courseCount = new Map();
+
+        for (const stud of students) {
+            const course = stud.course;
+            if (courseCount.has(course)) {
+                courseCount.set(course, courseCount.get(course) + 1)
+            } else {
+                courseCount.set(course, 1)
+            }
+        }
+        let row4 = `<strong>К-сть різних факультетів:</strong> ${fucultiesCount}<br>`;
+        row4 += `<strong>Кількість студентів за курсами:</strong><br>`;
+
+        for (const [course, count] of courseCount) {
+            row4 += `Курс ${course}: ${count}<br>`;
+        }
+        result4.innerHTML = row4;
+
+        // 5.  Дано масив показів температур. Підрахувати кількість входжень кожного із показів let temperatures = [12.4, 24.9, 10.6, 12.4, 24.9, 12.4, 10.6, 11.9] Заокруглити вверх значення та підрахувати кількість різних показів.
+        const result5 = document.querySelector('.item-testim__res5');
+        let temperatures = [12.4, 24.9, 10.6, 12.4, 24.9, 12.4, 10.6, 11.9];
+
+        const t = new Map();
+        for (const el of temperatures) {
+            if (t.has(el)) {
+                t.set(el, t.get(el) + 1)
+            }
+            else {
+                t.set(el, 1)
+            }
+        }
+
+        let row5 = `<strong>Кількість входжень початкових температур:</strong><br>`;
+        for (const [temp, count] of t) {
+            row5 += `Температура ${temp}: ${count}<br>`;
+        }
+
+        const roundedTemps = temperatures.map(temp => Math.ceil(temp));
+        const roundedSet = new Set(roundedTemps);
+
+        row5 += `<br><strong>Округлені вгору температури:</strong> [${roundedTemps.join(', ')}]<br>`;
+        row5 += `Кількість різних показів після округлення: ${roundedSet.size}<br>`;
+
+        result5.innerHTML = row5;
+
+        // 6. Дано два списки прізвищ студентів, що відвідують гуртки з математики і історії. Підрахувати скільки студентів з гуртка з історії також відвідують гурток з математики. Також підрахувати скільки всього студентів відвідують хоча б один гурток. 
+        const result6 = document.querySelector('.item-testim__res6');
+        const mathClub = ["Kovalenko", "Petrenko", "Shevchenko", "Melnyk", "Savchuk", "Bondar"]
+        const historyClub = ["Shevchenko", "Ivanova", "Kovalenko", "Tkachenko", "Bondar", "Moroz"]
+
+        const mathSet = new Set(mathClub)
+        const historySet = new Set(historyClub)
+        const bothClub = mathSet.intersection(historySet)
+        const allStudents = mathSet.union(historySet)
+
+        const p1 = document.createElement('p');
+        p1.textContent = `${bothClub.size} студенти відвідують і гурток з історії і гурток з математики.`;
+        result6.appendChild(p1);
+        const p2 = document.createElement('p');
+        p2.textContent = `${allStudents.size} студентів відвідують хоча б один гурток`
+        result6.appendChild(p2);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+
+[class*="__container"] {
+    max-width: 1030px;
+    padding-inline: 15px;
+    margin-inline: auto;
+}
+
+header {
+    padding-top: 10vh;
+
+    .header__title {
+        font-size: 1.875rem;
+        font-weight: 700;
+        text-align: center;
+        padding-block: 1.25rem;
+    }
+}
+
+img {
+    max-width: 500px;
+}
+
+li {
+
+    button {
+        padding: 3px;
+        border: 1px solid black;
+        width: 23px;
+    }
+}
+
+.hero {
+    padding-block: 1rem;
+
+}
+
+.hero__content {
+    padding: 1.25rem;
+        background-color: #eeeeee;
+        border-radius: .625rem;
+}
+
+.hero__task,
+.about__task,
+.review__task,
+.competition__task {
+    font-weight: 700;
+}
+
+.hero__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+.hero__item {
+    span {
+        color: red;
+        text-decoration: underline;
+    }
+    p {
+        margin-bottom: .625rem;
+    }
+}
+.hero__item1 {
+    cursor: pointer;
+    align-self: start;
+}
+
+.hero__link {
+    color: blue;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: .625rem;
+}
+
+.footer {
+    text-align: center;
+
+    .footer__content {
+        padding-block: 1.25rem;
+
+        p {
+            font-size: .875rem;
+            font-weight: 700;
+        }
+    }
+}

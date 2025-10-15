@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_1</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .study {
+            padding-top: 7svh;
+        }
+        .study__title {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+        .study__task p{
+            margin-bottom: .625rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="study page">
+            <div class="study__container">
+                <h4 class="study__title">Задача 1. Дано клас PhoneNumber. Створити функцію перетворення до string, при якому на
+                основі номера виводиться оператор
+                (050…. 🡪 MTC, 096… 🡪 Kyivstar, ….)</h4>
+                <div class="study__task"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+
+        const task = document.querySelector('.study__task')
+        const OPERATORS = {
+            Kyivstar: ["067", "068", "096", "097", "098", "077"],
+            Lifecell: ["063", "073", "093"],
+            Vodafone: ["050", "066", "095", "099"]
+        }
+
+        class PhoneNumber {
+            constructor(number) {
+                this.numb = number.trim()
+                this.normalized = this.normalize(this.numb)
+            }
+            normalize(raw) {
+                const digits = raw.replace(/\D/g, '');
+                if (digits.startsWith('380') && digits.length === 12) {
+                    return '0' + digits.slice(3);
+                } else if (digits.startsWith('0') && digits.length === 10) {
+                    return digits;
+                } else {
+                    return null;
+                }
+            }
+
+            getOperator() {
+                if (this.normalized === null) {
+                    return 'Невідомий номер'
+                }
+
+                const pref = this.normalized.slice(0, 3);
+
+                return Object.keys(OPERATORS).find(op => OPERATORS[op].includes(pref)) || 'Невідомий оператор'
+            }
+            [Symbol.toPrimitive](hint) {
+                if (hint === 'number') {
+                    if (this.normalized) return Number(this.normalized);
+                    else return NaN;
+                }
+                else if (hint === 'string') {
+                    if (this.normalized) return `${this.normalized} - ${this.getOperator()}`
+                    else 'Невідомий номер'
+                }
+            }
+        }
+        const numbers = ['0502345678', '+380962345678', '096-234-56-78', '0631234567', '123', 'abcd'];
+
+        numbers.forEach(num => {
+            const phone = new PhoneNumber(num);
+            const pre = document.createElement('p');
+            pre.textContent = phone;
+            task.append(pre)
+        })
+
+    </script>
+</body>
+
+</html>

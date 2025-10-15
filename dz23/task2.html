@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_2</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+        [class*="__container"] {
+            max-width: 830px;
+            padding-inline: 15px;
+            margin-inline: auto;
+        }
+
+        .product {
+            padding-top: 7svh;
+        }
+        .product__title {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+        .product__task p {
+            margin-bottom: .625rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header></header>
+
+    <main>
+        <section class="product page">
+            <div class="product__container">
+                <h4 class="product__title">Задача 2. Дано Shop -- клас, що містить список товарів (масив об’єктів класу Product
+                (назва, ціна, кількість одиниць)).
+                Додати можливість ітератора до класу Shop, щоб при ітеруванні для кожного елемента
+                виводився рядок «товар-загальна
+                вартість»</h4>
+                <div class="product__task"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+
+    <script>
+
+        const container = document.querySelector('.product__task')
+
+        function showResult(container, text) {
+            const p = document.createElement('p')
+            p.textContent = text;
+            container.appendChild(p) 
+        }
+
+        class Product {
+            constructor(name, price, count) {
+                this.name = name
+                this.price = price
+                this.count = count
+            }
+            getTotal() {
+                return this.price * this.count
+            }
+        }
+        class Shop {
+            constructor(products) {
+                this.products = products
+            }
+            [Symbol.iterator]() {
+                this.idx = 0;
+                return this
+            }
+            next() {
+                if (this.idx < this.products.length) {
+                    const prod = this.products[this.idx]
+                    this.idx++
+                    return { done: false, value: `${prod.name} - ${prod.getTotal()} грн.` }
+                } else {
+                    return { done: true }
+                }
+            }
+        }
+
+        const bread = new Product('Хліб', 10, 7)
+        const milk = new Product('Молоко', 6, 9)
+        const apple = new Product('Яблуко', 8, 10)
+        const sugar = new Product('Цукор', 25, 5)
+        const water = new Product('Вода', 20, 6)
+
+        const s = new Shop([bread, milk, apple, sugar, water])
+
+        for (const item of s) {
+            showResult(container, item)
+        }
+
+    </script>
+</body>
+
+</html>
